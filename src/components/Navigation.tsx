@@ -46,6 +46,13 @@ const Navigation = () => {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
+            <Link to="/about">
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                {translate('nav.about')}
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
             <Link to="/courses">
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 {translate('nav.courses')}
