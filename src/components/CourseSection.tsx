@@ -2,6 +2,7 @@
 import React from 'react';
 import { Globe, Calendar, Euro } from 'lucide-react';
 import { Card } from '@/components/ui/card';
+import { useLanguage } from '../context/LanguageContext';
 
 interface CourseInfo {
   type: string;
@@ -17,6 +18,8 @@ interface CourseSectionProps {
 }
 
 const CourseSection = ({ language, nativeName, courses }: CourseSectionProps) => {
+  const { translate } = useLanguage();
+  
   return (
     <section className="py-12">
       <div className="container mx-auto px-4">

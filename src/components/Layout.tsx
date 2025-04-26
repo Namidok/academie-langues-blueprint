@@ -19,8 +19,8 @@ const Layout = ({ children }: LayoutProps) => {
       </main>
       <footer className="bg-primary text-white py-6 text-center">
         <div className="container mx-auto px-4">
-          <p className="font-inter">© {currentYear} Académie de Langues étrangères. All rights reserved.</p>
-          <p className="font-inter text-sm mt-2">* Fees are subject to change</p>
+          <p className="font-inter">© {currentYear} Académie de Langues étrangères. {translate('footer.rights')}</p>
+          <p className="font-inter text-sm mt-2">{translate('footer.disclaimer')}</p>
         </div>
       </footer>
     </div>
