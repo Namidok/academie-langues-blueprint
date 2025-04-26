@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Globe } from 'lucide-react';
+import { useLanguage } from "../context/LanguageContext";
 
 const languages = [
   { value: 'english', label: 'English' },
@@ -14,12 +15,10 @@ const languages = [
 ];
 
 const Navigation = () => {
-  const [language, setLanguage] = React.useState('english');
+  const { language, setLanguage, translate } = useLanguage();
 
   const handleLanguageChange = (value: string) => {
-    setLanguage(value);
-    // In a real app, this would trigger a language change throughout the app
-    console.log(`Language changed to ${value}`);
+    setLanguage(value as 'english' | 'french' | 'german' | 'spanish' | 'japanese');
   };
 
   return (
@@ -27,9 +26,9 @@ const Navigation = () => {
       <div className="flex items-center">
         <Link to="/" className="flex items-center">
           <img 
-            src="/logo.png" 
+            src="/lovable-uploads/5141bf72-bcfe-4850-b610-49d43847b50e.png" 
             alt="Académie de Langues étrangères" 
-            className="h-12 w-auto mr-3"
+            className="h-16 w-auto mr-3"
             onError={(e) => {
               e.currentTarget.src = 'https://via.placeholder.com/120x48?text=Logo';
             }} 
@@ -42,21 +41,21 @@ const Navigation = () => {
           <NavigationMenuItem>
             <Link to="/">
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Home
+                {translate('nav.home')}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link to="/courses">
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Courses
+                {translate('nav.courses')}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
             <Link to="/contact">
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Contact Us
+                {translate('nav.contact')}
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -64,7 +63,7 @@ const Navigation = () => {
       </NavigationMenu>
       
       <div className="flex items-center">
-        <Select onValueChange={handleLanguageChange} defaultValue={language}>
+        <Select onValueChange={handleLanguageChange} defaultValue={language} value={language}>
           <SelectTrigger className="w-[140px]">
             <span className="flex items-center">
               <Globe className="mr-2 h-4 w-4" />
