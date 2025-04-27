@@ -6,8 +6,7 @@ import { coursesData } from '../data/coursesData';
 
 const countryInfo = {
   german: {
-    country: "Germany",
-    description: "Germany, a country at the heart of Europe, is known for its rich cultural heritage, technological innovation, and economic strength. German is the most widely spoken language in the European Union and is crucial for business, science, and engineering fields.",
+    countryKey: 'germany',
     keyPoints: [
       "Europe's largest economy",
       "World leader in engineering and technology",
@@ -17,8 +16,7 @@ const countryInfo = {
     image: "https://images.unsplash.com/photo-1599946347371-68eb71b16afc?auto=format&fit=crop&q=80"
   },
   french: {
-    country: "France",
-    description: "France, a global center of art, culture, and gastronomy, offers tremendous opportunities for international students and professionals. French is spoken in 29 countries and is essential for international relations, fashion, and culinary arts.",
+    countryKey: 'france',
     keyPoints: [
       "Cultural and artistic capital",
       "Leading destination for tourism",
@@ -28,8 +26,7 @@ const countryInfo = {
     image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80"
   },
   spanish: {
-    country: "Spain",
-    description: "Spanish, the second most spoken language by native speakers worldwide, opens doors throughout Spain and Latin America. It's essential for business, tourism, and cultural exchange across multiple continents.",
+    countryKey: 'spain',
     keyPoints: [
       "Growing global business language",
       "Rich literary and artistic tradition",
@@ -39,8 +36,7 @@ const countryInfo = {
     image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&q=80"
   },
   japanese: {
-    country: "Japan",
-    description: "Japan, a leader in technology and innovation, combines ancient traditions with ultra-modern life. Japanese language skills are valuable in technology, animation, and international business sectors.",
+    countryKey: 'japan',
     keyPoints: [
       "Technological innovation hub",
       "Rich traditional culture",
@@ -60,6 +56,7 @@ const CourseDetails = () => {
   }
 
   const info = countryInfo[language as keyof typeof countryInfo];
+  const countryKey = info.countryKey;
 
   return (
     <div className="min-h-screen bg-white">
@@ -68,15 +65,15 @@ const CourseDetails = () => {
         style={{ backgroundImage: `url(${info.image})` }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <h1 className="text-white text-4xl md:text-5xl font-bold">{info.country}</h1>
+          <h1 className="text-white text-4xl md:text-5xl font-bold">{translate(`country.${countryKey}.title`)}</h1>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <section className="mb-12">
-            <h2 className="text-3xl font-bold mb-6">{translate('courseDetails.about')} {info.country}</h2>
-            <p className="text-lg text-gray-700 mb-8">{info.description}</p>
+            <h2 className="text-3xl font-bold mb-6">{translate('courseDetails.about')} {translate(`country.${countryKey}.title`)}</h2>
+            <p className="text-lg text-gray-700 mb-8">{translate(`country.${countryKey}.description`)}</p>
             
             <div className="grid md:grid-cols-2 gap-6">
               {info.keyPoints.map((point, index) => (

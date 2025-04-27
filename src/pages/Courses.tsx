@@ -29,16 +29,16 @@ const Courses = () => {
       <main className="py-8">
         <div className="container mx-auto px-4 mb-12">
           <div className="prose max-w-none">
-            <h2 className="text-2xl font-bold text-primary mb-4">Opportunities Abroad</h2>
+            <h2 className="text-2xl font-bold text-primary mb-4">{translate('courses.opportunities.title')}</h2>
             <p className="mb-4">
-              Learning a foreign language opens doors to incredible opportunities abroad. Whether you're pursuing education, career advancement, or personal growth, mastering the local language of your destination country is crucial for:
+              {translate('courses.opportunities.description')}
             </p>
             <ul className="list-disc pl-6 mb-6">
-              <li>Enhanced career prospects in international companies</li>
-              <li>Better integration into local communities</li>
-              <li>Access to education at prestigious foreign universities</li>
-              <li>Rich cultural understanding and authentic experiences</li>
-              <li>Building meaningful relationships with locals</li>
+              <li>{translate('courses.opportunities.point1')}</li>
+              <li>{translate('courses.opportunities.point2')}</li>
+              <li>{translate('courses.opportunities.point3')}</li>
+              <li>{translate('courses.opportunities.point4')}</li>
+              <li>{translate('courses.opportunities.point5')}</li>
             </ul>
           </div>
         </div>
