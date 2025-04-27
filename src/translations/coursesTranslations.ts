@@ -1,0 +1,60 @@
+import { Language } from '../types/language';
+
+export const coursesTranslations: Record<string, Record<Language, string>> = {
+  'courses.title': {
+    english: 'Our Language Courses',
+    french: 'Nos cours de langue',
+    german: 'Unsere Sprachkurse',
+    spanish: 'Nuestros cursos de idiomas',
+    japanese: '私たちの語学コース',
+  },
+  'courses.subtitle': {
+    english: 'Comprehensive language programs designed to develop your speaking, listening, reading, and writing skills',
+    french: 'Programmes linguistiques complets conçus pour développer vos compétences en expression orale, en compréhension orale, en lecture et en écriture',
+    german: 'Umfassende Sprachprogramme zur Entwicklung Ihrer Sprech-, Hör-, Lese- und Schreibfähigkeiten',
+    spanish: 'Programas de idiomas completos diseñados para desarrollar sus habilidades de habla, escucha, lectura y escritura',
+    japanese: '話す、聞く、読む、書くスキルを開発するように設計された包括的な言語プログラム',
+  },
+  'courses.additionalInfo.title': {
+    english: 'Additional Information',
+    french: 'Informations supplémentaires',
+    german: 'Zusätzliche Information',
+    spanish: 'Información adicional',
+    japanese: '追加情報',
+  },
+  'courses.additionalInfo.item1': {
+    english: 'New batches start on the first Monday of every month',
+    french: 'Les nouveaux lots commencent le premier lundi de chaque mois',
+    german: 'Neue Gruppen beginnen am ersten Montag jedes Monats',
+    spanish: 'Los nuevos grupos comienzan el primer lunes de cada mes',
+    japanese: '新しいバッチは毎月第一月曜日に始まります',
+  },
+  'courses.additionalInfo.item2': {
+    english: 'Course materials are included in the fee',
+    french: 'Le matériel de cours est inclus dans les frais',
+    german: 'Kursmaterialien sind in der Gebühr enthalten',
+    spanish: 'Los materiales del curso están incluidos en la tarifa',
+    japanese: 'コース資料は料金に含まれています',
+  },
+  'courses.additionalInfo.item3': {
+    english: 'Special discounts for group enrollments',
+    french: 'Remises spéciales pour les inscriptions de groupe',
+    german: 'Sonderrabatte für Gruppenanmeldungen',
+    spanish: 'Descuentos especiales para inscripciones grupales',
+    japanese: 'グループ登録の特別割引',
+  },
+  'courses.additionalInfo.item4': {
+    english: 'One-time registration fee of ₹1,000 for new students',
+    french: 'Frais d\'inscription uniques de ₹1 000 pour les nouveaux étudiants',
+    german: 'Einmalige Anmeldegebühr von ₹1.000 für neue Studenten',
+    spanish: 'Cuota de inscripción única de ₹1,000 para nuevos estudiantes',
+    japanese: '新入生のための一回限りの登録料₹1,000',
+  },
+  'courses.additionalInfo.item5': {
+    english: '* Fees are subject to change',
+    french: '* Les frais sont sujets à changement',
+    german: '* Gebühren können sich ändern',
+    spanish: '* Las tarifas están sujetas a cambios',
+    japanese: '* 料金は変更される場合があります',
+  },
+};
