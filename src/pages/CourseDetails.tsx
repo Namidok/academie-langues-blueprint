@@ -2,6 +2,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { coursesData } from '../data/coursesData';
 
 const countryInfo = {
   german: {
