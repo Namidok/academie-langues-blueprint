@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import CourseSection from '@/components/CourseSection';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -74,6 +75,11 @@ const coursesData = {
 
 const Courses = () => {
   const { translate } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleCourseClick = (language: string) => {
+    navigate(`/courses/${language.toLowerCase()}`);
+  };
   
   return (
     <div className="min-h-screen bg-white">
@@ -89,18 +95,45 @@ const Courses = () => {
       </header>
       
       <main className="py-8">
-        {Object.values(coursesData).map((data, index) => (
-          <CourseSection
-            key={index}
-            language={data.language}
-            nativeName={data.nativeName}
-            courses={data.courses}
-          />
-        ))}
-        
+        <div className="container mx-auto px-4 mb-12">
+          <div className="prose max-w-none">
+            <h2 className="text-2xl font-bold text-primary mb-4">Opportunities Abroad</h2>
+            <p className="mb-4">
+              Learning a foreign language opens doors to incredible opportunities abroad. Whether you're pursuing education, career advancement, or personal growth, mastering the local language of your destination country is crucial for:
+            </p>
+            <ul className="list-disc pl-6 mb-6">
+              <li>Enhanced career prospects in international companies</li>
+              <li>Better integration into local communities</li>
+              <li>Access to education at prestigious foreign universities</li>
+              <li>Rich cultural understanding and authentic experiences</li>
+              <li>Building meaningful relationships with locals</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 container mx-auto px-4 mb-12">
+          {Object.entries(coursesData).map(([key, data]) => (
+            <div 
+              key={key}
+              onClick={() => handleCourseClick(data.language)}
+              className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform transition-transform hover:scale-105"
+            >
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2">{data.language}</h3>
+                <p className="text-gray-600">{data.nativeName}</p>
+                <button className="mt-4 text-primary hover:text-primary-dark">
+                  Learn more →
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <div className="container mx-auto px-4 mt-8">
           <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-            <h3 className="text-xl font-bold mb-4 text-primary">{translate('courses.additionalInfo.title')}</h3>
+            <h3 className="text-xl font-bold mb-4 text-primary">
+              {translate('courses.additionalInfo.title')}
+            </h3>
             <ul className="space-y-2">
               <li className="flex items-center">
                 <span className="w-2 h-2 bg-primary rounded-full mr-2"></span>

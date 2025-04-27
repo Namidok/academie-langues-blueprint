@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Courses from "./pages/Courses";
+import CourseDetails from "./pages/CourseDetails";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AboutUs from "./pages/AboutUs";
@@ -24,6 +26,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/:language" element={<CourseDetails />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="*" element={<NotFound />} />
