@@ -1,3 +1,4 @@
+
 import { Language } from '../types/language';
 
 export const coursesTranslations: Record<string, Record<Language, string>> = {
@@ -56,5 +57,47 @@ export const coursesTranslations: Record<string, Record<Language, string>> = {
     german: '* Gebühren können sich ändern',
     spanish: '* Las tarifas están sujetas a cambios',
     japanese: '* 料金は変更される場合があります',
+  },
+  'courses.notFound': {
+    english: 'Course not found',
+    french: 'Cours non trouvé',
+    german: 'Kurs nicht gefunden',
+    spanish: 'Curso no encontrado',
+    japanese: 'コースが見つかりません',
+  },
+  'courseDetails.about': {
+    english: 'About',
+    french: 'À propos de',
+    german: 'Über',
+    spanish: 'Acerca de',
+    japanese: 'について',
+  },
+  'courseDetails.availableCourses': {
+    english: 'Available Courses',
+    french: 'Cours disponibles',
+    german: 'Verfügbare Kurse',
+    spanish: 'Cursos disponibles',
+    japanese: '利用可能なコース',
+  },
+  'courseDetails.duration': {
+    english: 'Duration',
+    french: 'Durée',
+    german: 'Dauer',
+    spanish: 'Duración',
+    japanese: '期間',
+  },
+  'courseDetails.fee': {
+    english: 'Fee',
+    french: 'Frais',
+    german: 'Gebühr',
+    spanish: 'Tarifa',
+    japanese: '料金',
+  },
+  'courseDetails.equivalent': {
+    english: 'Equivalent to',
+    french: 'Équivalent à',
+    german: 'Entspricht',
+    spanish: 'Equivalente a',
+    japanese: 'に相当',
   },
 };

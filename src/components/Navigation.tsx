@@ -105,19 +105,16 @@ const Navigation = () => {
             <SelectTrigger className="w-[180px]">
               <span className="flex items-center">
                 <Globe className="mr-2 h-4 w-4" />
-                <span className="mr-2">
-                  {languages.find(lang => lang.value === language)?.flag}
-                </span>
                 <SelectValue placeholder="Select Language" />
               </span>
             </SelectTrigger>
             <SelectContent>
               {languages.map((lang) => (
-                <SelectItem key={lang.value} value={lang.value}>
-                  <span className="flex items-center">
+                <SelectItem key={lang.value} value={lang.value} className="flex items-center">
+                  <div className="flex items-center">
                     <span className="mr-2">{lang.flag}</span>
-                    {lang.label}
-                  </span>
+                    <span>{lang.label}</span>
+                  </div>
                 </SelectItem>
               ))}
             </SelectContent>
