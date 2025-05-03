@@ -9,7 +9,7 @@ const Header = () => {
     <header className="bg-primary text-white py-16 text-center">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-          <span className="font-['Old English Text MT'] block mb-2">Académie de Langues étrangères</span>
+          <span className="font-['UnifrakturMaguntia'] block mb-2">Académie de Langues étrangères</span>
           {translate('home.title') !== "Académie de Langues étrangères" && (
             <span className="font-playfair">{translate('home.title')}</span>
           )}
