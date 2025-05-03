@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Globe, Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import { useLanguage } from "../context/LanguageContext";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const languages = [
-  { value: 'english', label: 'English', flag: '🇬🇧' },
-  { value: 'french', label: 'Français', flag: '🇫🇷' },
-  { value: 'german', label: 'Deutsch', flag: '🇩🇪' },
-  { value: 'spanish', label: 'Español', flag: '🇪🇸' },
-  { value: 'japanese', label: '日本語', flag: '🇯🇵' },
+  { value: 'english', label: 'English' },
+  { value: 'french', label: 'Français' },
+  { value: 'german', label: 'Deutsch' },
+  { value: 'spanish', label: 'Español' },
+  { value: 'japanese', label: '日本語' },
 ];
 
 const Navigation = () => {
@@ -73,52 +73,47 @@ const Navigation = () => {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Mobile Navigation */}
-        <div className="md:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <button className="p-2">
-                <Menu className="h-6 w-6" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-4">
-                <Link to="/" className="block px-2 py-1 text-lg hover:text-primary">
-                  {translate('nav.home')}
-                </Link>
-                <Link to="/about" className="block px-2 py-1 text-lg hover:text-primary">
-                  {translate('nav.about')}
-                </Link>
-                <Link to="/courses" className="block px-2 py-1 text-lg hover:text-primary">
-                  {translate('nav.courses')}
-                </Link>
-                <Link to="/contact" className="block px-2 py-1 text-lg hover:text-primary">
-                  {translate('nav.contact')}
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
-
-        <div className="flex items-center">
+        <div className="flex items-center gap-4">
+          {/* Language Selector */}
           <Select onValueChange={handleLanguageChange} defaultValue={language} value={language}>
-            <SelectTrigger className="w-[180px]">
-              <span className="flex items-center">
-                <Globe className="mr-2 h-4 w-4" />
-                <SelectValue placeholder="Select Language" />
-              </span>
+            <SelectTrigger className="w-[120px]">
+              <SelectValue placeholder="Select Language" />
             </SelectTrigger>
             <SelectContent>
               {languages.map((lang) => (
-                <SelectItem key={lang.value} value={lang.value} className="flex items-center">
-                  <div className="flex items-center">
-                    <span className="mr-2">{lang.flag}</span>
-                    <span>{lang.label}</span>
-                  </div>
+                <SelectItem key={lang.value} value={lang.value}>
+                  {lang.label}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
+
+          {/* Mobile Navigation - Now on the right side */}
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <button className="p-2">
+                  <Menu className="h-6 w-6" />
+                </button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <nav className="flex flex-col gap-4">
+                  <Link to="/" className="block px-2 py-1 text-lg hover:text-primary">
+                    {translate('nav.home')}
+                  </Link>
+                  <Link to="/about" className="block px-2 py-1 text-lg hover:text-primary">
+                    {translate('nav.about')}
+                  </Link>
+                  <Link to="/courses" className="block px-2 py-1 text-lg hover:text-primary">
+                    {translate('nav.courses')}
+                  </Link>
+                  <Link to="/contact" className="block px-2 py-1 text-lg hover:text-primary">
+                    {translate('nav.contact')}
+                  </Link>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </nav>
