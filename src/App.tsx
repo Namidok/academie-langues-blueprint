@@ -5,35 +5,40 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
+import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/Layout";
+import Index from "./pages/Index";
 import Home from "./pages/Home";
+import AboutUs from "./pages/AboutUs";
 import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetails";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import AboutUs from "./pages/AboutUs";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <LanguageProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/:language" element={<CourseDetails />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/about" element={<AboutUs />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
-        </BrowserRouter>
-      </LanguageProvider>
+      <AuthProvider>
+        <LanguageProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/courses" element={<Courses />} />
+                <Route path="/course/:id" element={<CourseDetails />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </BrowserRouter>
+        </LanguageProvider>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );

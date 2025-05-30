@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Phone, Mail, Chrome } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 interface LoginDialogProps {
   open: boolean;
@@ -18,24 +20,119 @@ interface LoginDialogProps {
 }
 
 export const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [otp, setOtp] = useState('');
-  const [showOtpInput, setShowOtpInput] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handlePhoneLogin = () => {
-    // TODO: Implement phone login logic
-    console.log('Phone login with:', phoneNumber);
-    setShowOtpInput(true);
+  const handleEmailLogin = async () => {
+    if (!email || !password) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast({
+          title: "Login Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "Successfully logged in!",
+        });
+        onOpenChange(false);
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleOtpVerification = () => {
-    // TODO: Implement OTP verification logic
-    console.log('Verifying OTP:', otp);
+  const handleEmailSignUp = async () => {
+    if (!email || !password) {
+      toast({
+        title: "Error",
+        description: "Please fill in all fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast({
+          title: "Sign Up Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "Successfully signed up! Please check your email for verification.",
+        });
+        onOpenChange(false);
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleGoogleSignUp = () => {
-    // TODO: Implement Google sign up logic
-    console.log('Google sign up clicked');
+  const handleGoogleSignUp = async () => {
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}`,
+        },
+      });
+
+      if (error) {
+        toast({
+          title: "Google Sign Up Error",
+          description: error.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -56,44 +153,38 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) 
           <TabsContent value="login" className="space-y-4">
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="phone" className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  Phone Number
+                <Label htmlFor="email" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email
                 </Label>
                 <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+1 (555) 123-4567"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  id="email"
+                  type="email"
+                  placeholder="your.email@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full"
                 />
               </div>
               
-              {showOtpInput && (
-                <div className="space-y-2">
-                  <Label htmlFor="otp" className="flex items-center gap-2">
-                    <Mail className="h-4 w-4" />
-                    Enter OTP
-                  </Label>
-                  <Input
-                    id="otp"
-                    type="text"
-                    placeholder="Enter 6-digit OTP"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    maxLength={6}
-                    className="w-full"
-                  />
-                </div>
-              )}
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full"
+                />
+              </div>
               
               <Button 
-                onClick={showOtpInput ? handleOtpVerification : handlePhoneLogin}
+                onClick={handleEmailLogin}
                 className="w-full"
-                disabled={!phoneNumber || (showOtpInput && !otp)}
+                disabled={loading || !email || !password}
               >
-                {showOtpInput ? 'Verify OTP' : 'Send OTP'}
+                {loading ? 'Logging in...' : 'Login'}
               </Button>
             </div>
           </TabsContent>
@@ -101,20 +192,38 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) 
           <TabsContent value="register" className="space-y-4">
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="register-phone" className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  Phone Number
+                <Label htmlFor="register-email" className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  Email
                 </Label>
                 <Input
-                  id="register-phone"
-                  type="tel"
-                  placeholder="+1 (555) 123-4567"
+                  id="register-email"
+                  type="email"
+                  placeholder="your.email@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full"
                 />
               </div>
               
-              <Button className="w-full">
-                Register with OTP
+              <div className="space-y-2">
+                <Label htmlFor="register-password">Password</Label>
+                <Input
+                  id="register-password"
+                  type="password"
+                  placeholder="Choose a password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full"
+                />
+              </div>
+              
+              <Button 
+                onClick={handleEmailSignUp}
+                className="w-full"
+                disabled={loading || !email || !password}
+              >
+                {loading ? 'Signing up...' : 'Register'}
               </Button>
             </div>
           </TabsContent>
@@ -135,9 +244,10 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) 
           variant="outline" 
           className="w-full"
           onClick={handleGoogleSignUp}
+          disabled={loading}
         >
           <Chrome className="mr-2 h-4 w-4" />
-          Sign up with Google
+          {loading ? 'Connecting...' : 'Sign up with Google'}
         </Button>
       </DialogContent>
     </Dialog>
