@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import { Menu } from 'lucide-react';
 import { useLanguage } from "../context/LanguageContext";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { LoginDialog } from "./LoginDialog";
 
 const languages = [
   { value: 'english', label: 'English' },
@@ -18,6 +20,7 @@ const languages = [
 const Navigation = () => {
   const { language, setLanguage, translate } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
 
   const handleLanguageChange = (value: string) => {
     setLanguage(value as 'english' | 'french' | 'german' | 'spanish' | 'japanese');
@@ -88,6 +91,15 @@ const Navigation = () => {
             </SelectContent>
           </Select>
 
+          {/* Login/Sign Up Button */}
+          <Button 
+            onClick={() => setIsLoginDialogOpen(true)}
+            variant="outline"
+            className="hidden md:flex"
+          >
+            Login/Sign Up
+          </Button>
+
           {/* Mobile Navigation - Now on the right side */}
           <div className="md:hidden">
             <Sheet>
@@ -110,12 +122,24 @@ const Navigation = () => {
                   <Link to="/contact" className="block px-2 py-1 text-lg hover:text-primary">
                     {translate('nav.contact')}
                   </Link>
+                  <Button 
+                    onClick={() => setIsLoginDialogOpen(true)}
+                    variant="outline"
+                    className="mt-4"
+                  >
+                    Login/Sign Up
+                  </Button>
                 </nav>
               </SheetContent>
             </Sheet>
           </div>
         </div>
       </div>
+
+      <LoginDialog 
+        open={isLoginDialogOpen} 
+        onOpenChange={setIsLoginDialogOpen} 
+      />
     </nav>
   );
 };
