@@ -78,9 +78,14 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) 
 
     setLoading(true);
     try {
+      const redirectUrl = `${window.location.origin}/`;
+      
       const { error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: redirectUrl
+        }
       });
 
       if (error) {
@@ -107,19 +112,19 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) 
     }
   };
 
-  const handleGoogleSignUp = async () => {
+  const handleGoogleAuth = async () => {
     setLoading(true);
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}`,
+          redirectTo: `${window.location.origin}/`,
         },
       });
 
       if (error) {
         toast({
-          title: "Google Sign Up Error",
+          title: "Google Authentication Error",
           description: error.message,
           variant: "destructive",
         });
@@ -243,11 +248,11 @@ export const LoginDialog: React.FC<LoginDialogProps> = ({ open, onOpenChange }) 
         <Button 
           variant="outline" 
           className="w-full"
-          onClick={handleGoogleSignUp}
+          onClick={handleGoogleAuth}
           disabled={loading}
         >
           <Chrome className="mr-2 h-4 w-4" />
-          {loading ? 'Connecting...' : 'Sign up with Google'}
+          {loading ? 'Connecting...' : 'Continue with Google'}
         </Button>
       </DialogContent>
     </Dialog>
