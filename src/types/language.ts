@@ -1,5 +1,5 @@
 
-export type Language = 'english' | 'french' | 'german' | 'spanish' | 'japanese';
+export type Language = 'english' | 'french' | 'german';
 
 export interface LanguageContextType {
   language: Language;
