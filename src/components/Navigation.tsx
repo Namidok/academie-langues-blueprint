@@ -14,8 +14,6 @@ const languages = [
   { value: 'english', label: 'English' },
   { value: 'french', label: 'Français' },
   { value: 'german', label: 'Deutsch' },
-  { value: 'spanish', label: 'Español' },
-  { value: 'japanese', label: '日本語' },
 ];
 
 const Navigation = () => {
@@ -24,7 +22,7 @@ const Navigation = () => {
   const [isLoginDialogOpen, setIsLoginDialogOpen] = useState(false);
 
   const handleLanguageChange = (value: string) => {
-    setLanguage(value as 'english' | 'french' | 'german' | 'spanish' | 'japanese');
+    setLanguage(value as 'english' | 'french' | 'german');
   };
 
   const handleSignOut = async () => {

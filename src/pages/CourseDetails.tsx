@@ -24,26 +24,6 @@ const countryInfo = {
       "Rich culinary heritage"
     ],
     image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&q=80"
-  },
-  spanish: {
-    countryKey: 'spain',
-    keyPoints: [
-      "Growing global business language",
-      "Rich literary and artistic tradition",
-      "Gateway to Latin American markets",
-      "Vibrant cultural experience"
-    ],
-    image: "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&q=80"
-  },
-  japanese: {
-    countryKey: 'japan',
-    keyPoints: [
-      "Technological innovation hub",
-      "Rich traditional culture",
-      "Leader in electronics and automotive",
-      "Unique work culture"
-    ],
-    image: "https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&q=80"
   }
 };
 
@@ -82,6 +62,25 @@ const CourseDetails = () => {
                 </div>
               ))}
             </div>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold mb-6">{translate('courseDetails.culture.title')}</h2>
+            <p className="text-lg text-gray-700">{translate(`country.${countryKey}.culture`)}</p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold mb-6">{translate('courseDetails.opportunities.title')}</h2>
+            <p className="text-lg text-gray-700">{translate(`country.${countryKey}.opportunities`)}</p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-3xl font-bold mb-6">{translate('courseDetails.colleges.title')}</h2>
+            <ul className="list-disc list-inside text-lg text-gray-700">
+              {translate(`country.${countryKey}.colleges`).split(',').map((college: string, index: number) => (
+                <li key={index}>{college.trim()}</li>
+              ))}
+            </ul>
           </section>
 
           <section className="bg-primary/5 rounded-xl p-8">

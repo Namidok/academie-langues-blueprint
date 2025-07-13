@@ -104,8 +104,6 @@ const Contact = () => {
                     <option value="">{translate('contact.form.interestPlaceholder')}</option>
                     <option value="french">{translate('contact.form.french')}</option>
                     <option value="german">{translate('contact.form.german')}</option>
-                    <option value="spanish">{translate('contact.form.spanish')}</option>
-                    <option value="japanese">{translate('contact.form.japanese')}</option>
                   </select>
                 </div>
                 
